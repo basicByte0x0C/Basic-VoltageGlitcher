@@ -10,7 +10,7 @@ String serialBuffer = "";
 
 /* Glitch Stuff */
 #define PIN_GLITCH    9       /* Also PWM Pin if needed */
-#define MAX_MS_DELAY  16000   /* delayMicroseconds() is using 16 bit integer => round it to 16k */
+#define MAX_US_DELAY  16000   /* delayMicroseconds() is using 16 bit integer => round it to 16k */
 
 /* Configuration Stuff */
 /* Wait times in microseconds */
@@ -25,10 +25,10 @@ static int postWait = 10;
  ********************************************/
 void Glitch_DelayMicroseconds(int microseconds)
 {
-  while(MAX_MS_DELAY < microseconds)
+  while(MAX_US_DELAY < microseconds)
   {
-    delayMicroseconds(MAX_MS_DELAY);
-    microseconds -= MAX_MS_DELAY;
+    delayMicroseconds(MAX_US_DELAY);
+    microseconds -= MAX_US_DELAY;
   }
   delayMicroseconds(microseconds);
 }
