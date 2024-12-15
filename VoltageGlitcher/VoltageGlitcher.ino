@@ -26,15 +26,25 @@ static int postWait = WAIT_DEFAULT;
  ********************************************/
 void Glitch_DelayMicroseconds(int microseconds)
 {
-  /* Break wait time in smaller chunks */
-  while(MAX_US_DELAY < microseconds)
+  /* Validity Checks */
+  if(0 > microseconds)
   {
-    delayMicroseconds(MAX_US_DELAY);
-    microseconds -= MAX_US_DELAY;
+    /* Invalid Parameter */
+    return;
   }
+  else
+  {
+    /* Implementation */
+    /* Break wait time in smaller chunks */
+    while(MAX_US_DELAY < microseconds)
+    {
+      delayMicroseconds(MAX_US_DELAY);
+      microseconds -= MAX_US_DELAY;
+    }
 
-  /* Wait the remaining time */
-  delayMicroseconds(microseconds);
+    /* Wait the remaining time */
+    delayMicroseconds(microseconds);
+  }
 }
 
 /*********************************************
@@ -88,26 +98,36 @@ void Glitch(void)
  ********************************************/
 void Config_Set(int *target, int value)
 {
-  /* Check Value */
-  if(0 < value)
+  /* Validity Checks */
+  if((NULL == target) || (0 > value))
   {
-    /* Set Value */
-    *target = value;
-    Serial.print(" set to : ");
-    Serial.println(value);
+    /* Invalid Parameter */
+    return;
   }
   else
   {
-    /* Unknown Input */
-    Serial.println("Invalid Value");
-  }  
+    /* Implementation */
+    /* Check Value */
+    if(0 < value)
+    {
+      /* Set Value */
+      *target = value;
+      Serial.print(" set to : ");
+      Serial.println(value);
+    }
+    else
+    {
+      /* Unknown Input */
+      Serial.println("Invalid Value");
+    }
+  }
 }
 
 /*********************************************
  *    Serial_WrongCommand()
  * Let the user know that the command is wrong.
  ********************************************/
-void Serial_WrongCommand()
+void Serial_WrongCommand(void)
 {
   /* Unknown Input */
   Serial.println("Wrong Command");
@@ -125,7 +145,7 @@ void Serial_Parser(void)
   int firstIndex = serialBuffer.indexOf('(');
   int secondIndex = serialBuffer.indexOf(')');
 
-  /* If Command is valid */
+  /* Validity Checks */
   if ((-1 != firstIndex) && (-1 != secondIndex)) 
   { 
     /* Break Command in Action and Value */
@@ -192,7 +212,7 @@ void Serial_Parser(void)
  *    setup()
  * Initialization of Arduino program.
  ********************************************/
-void setup() 
+void setup(void) 
 {
   /* Initialize Glitch Pin */
   pinMode(PIN_GLITCH, OUTPUT);      /* Control Glitcher */
@@ -207,7 +227,7 @@ void setup()
  *    loop()
  * MainFunction of the Arduino program.
  ********************************************/
-void loop() 
+void loop(void) 
 {
   /* If Command is available */
   if(Serial.available())

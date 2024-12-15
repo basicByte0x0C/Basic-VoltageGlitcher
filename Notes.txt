@@ -47,4 +47,4 @@
  *  ----- Get Post Command -----
  *  Send with: GetPost()
  *  What it does: Print the configured value of the wait time after the glitch.
- *
+ */
