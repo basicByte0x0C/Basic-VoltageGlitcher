@@ -2,7 +2,8 @@
  *      Voltage Glitcher
  ***********************************************************************/
 /* - Designed with a GroundStudio Jade Nano+
- * - Use a MOS Module based on IRF52
+ * - Use a MOS Module based on IRF520N
+ 
 /* Serial Stuff */
 #define SERIAL_BRATE 115200
 String serialBuffer = "";
