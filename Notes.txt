@@ -19,3 +19,32 @@
  *                      V+ --> Target Vin
  *                      V- --> Target GND 
  *************************************************************************************/
+/*
+ *  ----- Glitch Command -----
+ *  Send with: Glitch()
+ *  What it does: Perform the glitch.
+ *  
+ *  ----- Set Pre Command -----
+ *  Send with: SetPre(<value>)
+ *  What it does: Set the wait time before the glitch in microseconds.
+ *
+ *  ----- Get Pre Command -----
+ *  Send with: GetPre()
+ *  What it does: Print the configured value of the wait time before the glitch.
+ *
+ *  ----- Set Glitch Command -----
+ *  Send with: SetGlitch(<value>)
+ *  What it does: Set the wait time of the glitch in microseconds.
+ *
+ *  ----- Get Glitch Command -----
+ *  Send with: GetGlitch()
+ *  What it does: Print the configured value of the wait time of the glitch.
+ *
+ *  ----- Set Post Command -----
+ *  Send with: SetPost(<value>)
+ *  What it does: Set the wait time after the glitch in microseconds.
+ *
+ *  ----- Get Post Command -----
+ *  Send with: GetPost()
+ *  What it does: Print the configured value of the wait time after the glitch.
+ *
