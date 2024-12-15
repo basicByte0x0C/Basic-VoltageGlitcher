@@ -1,0 +1,21 @@
+/**************************************************************************************
+ *          Basic Voltage Glitcher
+ *************************************************************************************/
+/*  - Designed with GroundStudio Jade Nano+ in mind, should work with any Atmega328p.
+ *  - Used MOS Module based on IRF520N, should support a lot of Voltage and Amperage.
+ *  - Customizable settings to controll the length of the glitch.
+ *  - Customizable code before and after the glitch.
+ *  - Easy use by sending commands through Serial. Easy to integrate in Scripts.
+ */
+/**************************************************************************************
+ * ------------------------------ Mechanical Design ------------------------------
+ *
+ *  (Arduino)             (MOS Module)              (Power Source)
+ *  PIN 9       -->     SIG             
+ *  GND         -->     GND 
+ *  5v          -->     VCC
+ *                      GND                 <--         GND(-)
+ *                      Vin                 <--         VCC(+)
+ *                      V+ --> Target Vin
+ *                      V- --> Target GND 
+ *************************************************************************************/

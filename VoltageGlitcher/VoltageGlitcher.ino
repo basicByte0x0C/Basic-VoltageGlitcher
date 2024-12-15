@@ -33,17 +33,30 @@ void Glitch_DelayMicroseconds(int microseconds)
   delayMicroseconds(microseconds);
 }
 
+/*********************************************
+ *    Glitch_PreCallout()
+ * Implement whatever custom code before the
+ * glitch execution.
+ ********************************************/
 void Glitch_PreCallout(void)
 {
   Glitch_DelayMicroseconds(preWait);
 }
 
+/*********************************************
+ *    Glitch_PostCallout()
+ * Implement whatever custom code after the
+ * glitch execution.
+ ********************************************/
 void Glitch_PostCallout(void)
 {
   Glitch_DelayMicroseconds(postWait);
 }
 
-/* Glitch the Voltage */
+/*********************************************
+ *    Glitch()
+ * Perform the Voltage Glitch.
+ ********************************************/
 void Glitch(void)
 {
   /* Prepare */
@@ -58,11 +71,17 @@ void Glitch(void)
   Glitch_PostCallout();
 }
 
+/*********************************************
+ *    Config_Set()
+ * Configure a target parameter to a specified
+ * value.
+ ********************************************/
 void Config_Set(int *target, int value)
 {
   /* Check Value */
   if(0 < value)
   {
+    /* Set Value */
     *target = value;
     Serial.print(" set to : ");
     Serial.println(value);
@@ -73,12 +92,21 @@ void Config_Set(int *target, int value)
   }  
 }
 
+/*********************************************
+ *    Serial_WrongCommand()
+ * Let the user know that the command is wrong.
+ ********************************************/
 void Serial_WrongCommand()
 {
   Serial.println("Wrong Command");
   Serial.println("Command example:<setting>(<value>)");
 }
 
+/*********************************************
+ *    Serial Parser()
+ * Parse the user input from Serial and decide
+ * what to do.
+ ********************************************/
 void Serial_Parser(void)
 {
   /* Parse Command */ 
@@ -146,8 +174,13 @@ void Serial_Parser(void)
   }
 }
 
-void setup() {
-  // put your setup code here, to run once:
+/*********************************************
+ *    setup()
+ * Initialization of Arduino program.
+ ********************************************/
+void setup() 
+{
+  /* Initialize Glitch Pin */
   pinMode(PIN_GLITCH, OUTPUT);      /* Control Glitcher */
   digitalWrite(PIN_GLITCH, HIGH);   /* Power the Device */
 
@@ -156,8 +189,12 @@ void setup() {
   Serial.println("I begun");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+/*********************************************
+ *    loop()
+ * MainFunction of the Arduino program.
+ ********************************************/
+void loop() 
+{
   /* If Command is available */
   if(Serial.available())
   {
