@@ -6,17 +6,18 @@
  
 /* Serial Stuff */
 #define SERIAL_BRATE 115200
-String serialBuffer = "";
+static String serialBuffer = "";
 
 /* Glitch Stuff */
 #define PIN_GLITCH    9       /* Also PWM Pin if needed */
+#define WAIT_DEFAULT  10      /* Default Wait time for configuration */
 #define MAX_US_DELAY  16000   /* delayMicroseconds() is using 16 bit integer => round it to 16k */
 
 /* Configuration Stuff */
 /* Wait times in microseconds */
-static int preWait = 10;
-static int glitchWait = 10;
-static int postWait = 10;
+static int preWait = WAIT_DEFAULT;
+static int glitchWait = WAIT_DEFAULT;
+static int postWait = WAIT_DEFAULT;
 
 /*********************************************
  *    Glitch_DelayMicroseconds()
@@ -25,11 +26,14 @@ static int postWait = 10;
  ********************************************/
 void Glitch_DelayMicroseconds(int microseconds)
 {
+  /* Break wait time in smaller chunks */
   while(MAX_US_DELAY < microseconds)
   {
     delayMicroseconds(MAX_US_DELAY);
     microseconds -= MAX_US_DELAY;
   }
+
+  /* Wait the remaining time */
   delayMicroseconds(microseconds);
 }
 
@@ -40,6 +44,9 @@ void Glitch_DelayMicroseconds(int microseconds)
  ********************************************/
 void Glitch_PreCallout(void)
 {
+  /* Custom Implementation */
+
+  /* Wait some time before the glitch */
   Glitch_DelayMicroseconds(preWait);
 }
 
@@ -50,6 +57,9 @@ void Glitch_PreCallout(void)
  ********************************************/
 void Glitch_PostCallout(void)
 {
+  /* Custom Implementation */
+
+  /* Wait some time after the glitch */
   Glitch_DelayMicroseconds(postWait);
 }
 
@@ -88,6 +98,7 @@ void Config_Set(int *target, int value)
   }
   else
   {
+    /* Unknown Input */
     Serial.println("Invalid Value");
   }  
 }
@@ -98,6 +109,7 @@ void Config_Set(int *target, int value)
  ********************************************/
 void Serial_WrongCommand()
 {
+  /* Unknown Input */
   Serial.println("Wrong Command");
   Serial.println("Command example:<setting>(<value>)");
 }
@@ -165,11 +177,13 @@ void Serial_Parser(void)
     }
     else
     {
+      /* Unknown Input */
       Serial_WrongCommand();
     }
   }
   else
   {
+    /* Unknown Input */
     Serial_WrongCommand();
   }
 }
