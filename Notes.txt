@@ -3,7 +3,7 @@
  *************************************************************************************/
 /*  - Designed with GroundStudio Jade Nano+ in mind, should work with any Atmega328p.
  *  - Used MOS Module based on IRF520N, should support a lot of Voltage and Amperage.
- *  - Customizable settings to controll the length of the glitch.
+ *  - Customizable settings to control the length of the glitch in microseconds.
  *  - Customizable code before and after the glitch.
  *  - Easy use by sending commands through Serial. Easy to integrate in Scripts.
  */
