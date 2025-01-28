@@ -12,12 +12,30 @@ static String serialBuffer = "";
 #define PIN_GLITCH    9       /* Also PWM Pin if needed */
 #define WAIT_DEFAULT  10      /* Default Wait time for configuration */
 #define MAX_US_DELAY  16000   /* delayMicroseconds() is using 16 bit integer => round it to 16k */
+#define RESET_DEFAULT 5		  /* Default Hard Reset time in seconds */
 
 /* Configuration Stuff */
 /* Wait times in microseconds */
 static int preWait = WAIT_DEFAULT;
 static int glitchWait = WAIT_DEFAULT;
 static int postWait = WAIT_DEFAULT;
+static int resetWait = RESET_DEFAULT;
+
+/*********************************************
+ *    Glitch_HardReset()
+ * Implement a Hard Reset for the target
+ ********************************************/
+void Glitch_HardReset(void)
+{
+  /* Power Off Target */
+  digitalwrite(PIN_GLITCH, LOW);
+
+  /* Wait Hard Reset Seconds */
+  delay(resetWait * 1000);
+
+  /* Power On Target */
+  digitalwrite(PIN_GLITCH, HIGH);
+}
 
 /*********************************************
  *    Glitch_DelayMicroseconds()
@@ -158,6 +176,23 @@ void Serial_Parser(void)
     {
       Glitch();
       Serial.println("I Glitched");
+    }
+    else if(action.equals("HardReset))
+    {
+      /* Perform Hard Reset */
+      Glitch_HardReset();
+    }
+    else if(action.equals("SetReset"))
+    {
+      /* Set Reset Wait Time */
+      Serial.print("Reset Wait");
+      Config_Set(&resetWait, value);
+    }
+    else if(action.equals("GetReset"))
+    {
+      /* Print Reset Wait Time */
+      Serial.print("Reset Wait : ");
+      Serial.println(resetWait);
     }
     else if(action.equals("GetPre"))
     {

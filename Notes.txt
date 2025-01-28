@@ -23,7 +23,19 @@
  *  ----- Glitch Command -----
  *  Send with: Glitch()
  *  What it does: Perform the glitch.
- *  
+ * 
+ *  ----- Hard Reset Command -----
+ *  Send with: HardReset()
+ *  What it does: Perform a Hard Reset on Target.
+ *
+ *  ----- Set Reset Command -----
+ *  Send with: SetReset(<value>)
+ *  What it does: Set the Hard Reset wait time in seconds.
+ *
+ *  ----- Get Reset Command -----
+ *  Send with: GetReset()
+ *  What it does: Print the configured value of the Hard Reset wait time in seconds.
+ *
  *  ----- Set Pre Command -----
  *  Send with: SetPre(<value>)
  *  What it does: Set the wait time before the glitch in microseconds.
