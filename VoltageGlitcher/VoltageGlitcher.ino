@@ -28,13 +28,13 @@ static int resetWait = RESET_DEFAULT;
 void Glitch_HardReset(void)
 {
   /* Power Off Target */
-  digitalwrite(PIN_GLITCH, LOW);
+  digitalWrite(PIN_GLITCH, LOW);
 
   /* Wait Hard Reset Seconds */
   delay(resetWait * 1000);
 
   /* Power On Target */
-  digitalwrite(PIN_GLITCH, HIGH);
+  digitalWrite(PIN_GLITCH, HIGH);
 }
 
 /*********************************************
